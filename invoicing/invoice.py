@@ -6,6 +6,9 @@ import os
 
 
 def generate(invoices_path, pdfs_path,image_path, product_id, product_name, amount_purchased, price_per_unit, total_price):
+    """
+    This Function converts invoice Excel files into PDF Invoices
+    """
 
     filepaths = glob.glob(f"{invoices_path}/*.xlsx")
 
@@ -65,5 +68,6 @@ def generate(invoices_path, pdfs_path,image_path, product_id, product_name, amou
         pdf.cell(w=30,h=8, txt=f'Smugcurve13')
         pdf.image(image_path, w=10)
 
-        os.makedirs(pdfs_path)
+        if not os.path.exists(pdfs_path):
+            os.makedirs(pdfs_path)  
         pdf.output(f"{pdfs_path}/{filename}.pdf")
